@@ -1,0 +1,3 @@
+# Project exclude paths
+/charm-server-build/target/
+/charm-server-gateway/target/
