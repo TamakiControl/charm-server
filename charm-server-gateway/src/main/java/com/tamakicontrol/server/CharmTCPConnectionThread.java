@@ -13,14 +13,14 @@ public class CharmTCPConnectionThread extends Thread {
     private static final Logger logger = LoggerFactory.getLogger(CharmTCPConnectionThread.class);
 
     private final Socket socket;
-    private BufferedReader is;
-
     public CharmTCPConnectionThread(Socket socket){
         this.socket = socket;
     }
 
     @Override
     public void run() {
+        BufferedReader is;
+
         try{
             is = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         }catch (IOException e){

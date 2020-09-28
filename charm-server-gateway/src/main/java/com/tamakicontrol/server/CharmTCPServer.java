@@ -19,17 +19,21 @@ public abstract class CharmTCPServer implements Runnable {
     }
 
     private boolean enabled = true;
-    public synchronized void enable(){
+    public synchronized void setEnabled(final boolean enabled){
         this.enabled = true;
     }
 
-    public synchronized void disable(){
-        this.enabled = false;
+    public boolean getEnabled(){
+        return enabled;
     }
 
     public synchronized void shutdown(){
-        disable();
+        setEnabled(false);
         close();
+    }
+
+    public int getPort(){
+        return port;
     }
 
     @Override
