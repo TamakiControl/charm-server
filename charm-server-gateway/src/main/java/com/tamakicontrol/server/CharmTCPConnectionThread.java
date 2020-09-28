@@ -34,6 +34,9 @@ public class CharmTCPConnectionThread extends Thread {
                 logger.trace(String.format("Read From Charm Socket: %s", line));
                 line = is.readLine();
             }
+
+            //todo things
+
         }catch (IOException e){
             logger.error("IOException While Handling Input from Charm TCP Socket", e);
         }finally {
