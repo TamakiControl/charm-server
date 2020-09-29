@@ -1,5 +1,13 @@
 package com.tamakicontrol;
 
+import com.google.common.base.Objects;
+import com.inductiveautomation.ignition.common.sqltags.model.types.DataType;
+import com.tamakicontrol.utils.PublishTag;
+import lombok.EqualsAndHashCode;
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+
+import java.util.Arrays;
 import java.util.Date;
 
 public class CharmTestResult {
@@ -49,6 +57,7 @@ public class CharmTestResult {
     }
 
 
+    @PublishTag(name="Answer", dataType=DataType.String)
     private String result;
     public String getResult(){
         return result;
@@ -58,6 +67,7 @@ public class CharmTestResult {
     }
 
 
+    @PublishTag(name="Answer", dataType= DataType.Float8)
     private Double answer;
     public Double getAnswer(){
         return answer;
@@ -66,7 +76,7 @@ public class CharmTestResult {
         this.answer = answer;
     }
 
-
+    @PublishTag(name="SerialNo", dataType=DataType.Int4)
     private int unitSN;
     public int getUnitSN(){
         return unitSN;
@@ -138,11 +148,11 @@ public class CharmTestResult {
         this.testLINE = testLINE;
     }
 
-    private int XLine;
-    public int getXLine(){
+    private Double XLine;
+    public Double getXLine(){
         return XLine;
     }
-    public void setXLine(int XLine){
+    public void setXLine(Double XLine){
         this.XLine = XLine;
     }
 
@@ -171,16 +181,8 @@ public class CharmTestResult {
         return remissions;
     }
     public void setRemissions(Double[] remissions){
-
-    private double[] remissions = new double[128];
-    public double[] getRemissions(){
-        return remissions;
-    }
-    public void setRemissions(double[] remissions){
         this.remissions = remissions;
     }
-
-
 
     private Double tipRed;
     public Double getTipRed(){
@@ -235,7 +237,6 @@ public class CharmTestResult {
         this.interpString = interpString;
     }
 
-
     private Double yLine;
     public Double getYLine(){
         return yLine;
@@ -252,6 +253,78 @@ public class CharmTestResult {
         this.zLine = zLine;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        CharmTestResult that = (CharmTestResult) o;
+
+        if (channelNumber != that.channelNumber) return false;
+        if (unitSN != that.unitSN) return false;
+        if (lotNumber != that.lotNumber) return false;
+        if (sampleID != that.sampleID) return false;
+        if (operatorID != that.operatorID) return false;
+        if (mode != that.mode) return false;
+        if (failCode != that.failCode) return false;
+        if (controlLINE != that.controlLINE) return false;
+        if (testLINE != that.testLINE) return false;
+        if (testOutputName != null ? !testOutputName.equals(that.testOutputName) : that.testOutputName != null)
+            return false;
+        if (structVersion != null ? !structVersion.equals(that.structVersion) : that.structVersion != null)
+            return false;
+        if (assay != null ? !assay.equals(that.assay) : that.assay != null) return false;
+        if (date != null ? !date.equals(that.date) : that.date != null) return false;
+        if (result != null ? !result.equals(that.result) : that.result != null) return false;
+        if (answer != null ? !answer.equals(that.answer) : that.answer != null) return false;
+        if (XLine != null ? !XLine.equals(that.XLine) : that.XLine != null) return false;
+        if (interpretation != null ? !interpretation.equals(that.interpretation) : that.interpretation != null)
+            return false;
+        if (testTemperature != null ? !testTemperature.equals(that.testTemperature) : that.testTemperature != null)
+            return false;
+        // Probably incorrect - comparing Object[] arrays with Arrays.equals
+        if (!Arrays.equals(remissions, that.remissions)) return false;
+        if (tipRed != null ? !tipRed.equals(that.tipRed) : that.tipRed != null) return false;
+        if (tipGreen != null ? !tipGreen.equals(that.tipGreen) : that.tipGreen != null) return false;
+        if (tipBlue != null ? !tipBlue.equals(that.tipBlue) : that.tipBlue != null) return false;
+        if (dirt != null ? !dirt.equals(that.dirt) : that.dirt != null) return false;
+        if (flow != null ? !flow.equals(that.flow) : that.flow != null) return false;
+        if (interpString != null ? !interpString.equals(that.interpString) : that.interpString != null) return false;
+        if (yLine != null ? !yLine.equals(that.yLine) : that.yLine != null) return false;
+        return zLine != null ? zLine.equals(that.zLine) : that.zLine == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result1 = testOutputName != null ? testOutputName.hashCode() : 0;
+        result1 = 31 * result1 + (structVersion != null ? structVersion.hashCode() : 0);
+        result1 = 31 * result1 + channelNumber;
+        result1 = 31 * result1 + (assay != null ? assay.hashCode() : 0);
+        result1 = 31 * result1 + (date != null ? date.hashCode() : 0);
+        result1 = 31 * result1 + (result != null ? result.hashCode() : 0);
+        result1 = 31 * result1 + (answer != null ? answer.hashCode() : 0);
+        result1 = 31 * result1 + unitSN;
+        result1 = 31 * result1 + lotNumber;
+        result1 = 31 * result1 + sampleID;
+        result1 = 31 * result1 + operatorID;
+        result1 = 31 * result1 + mode;
+        result1 = 31 * result1 + failCode;
+        result1 = 31 * result1 + controlLINE;
+        result1 = 31 * result1 + testLINE;
+        result1 = 31 * result1 + (XLine != null ? XLine.hashCode() : 0);
+        result1 = 31 * result1 + (interpretation != null ? interpretation.hashCode() : 0);
+        result1 = 31 * result1 + (testTemperature != null ? testTemperature.hashCode() : 0);
+        result1 = 31 * result1 + Arrays.hashCode(remissions);
+        result1 = 31 * result1 + (tipRed != null ? tipRed.hashCode() : 0);
+        result1 = 31 * result1 + (tipGreen != null ? tipGreen.hashCode() : 0);
+        result1 = 31 * result1 + (tipBlue != null ? tipBlue.hashCode() : 0);
+        result1 = 31 * result1 + (dirt != null ? dirt.hashCode() : 0);
+        result1 = 31 * result1 + (flow != null ? flow.hashCode() : 0);
+        result1 = 31 * result1 + (interpString != null ? interpString.hashCode() : 0);
+        result1 = 31 * result1 + (yLine != null ? yLine.hashCode() : 0);
+        result1 = 31 * result1 + (zLine != null ? zLine.hashCode() : 0);
+        return result1;
+    }
 }
 
 

@@ -27,7 +27,7 @@ public class CharmTagProvider {
      * Starts up the tag provider and creates and instance of the singleton
      * */
     public static void startup(GatewayContext gatewayContext){
-        if(instance != null) {
+        if(instance == null) {
             instance = new CharmTagProvider();
             try {
                 instance.simpleTagProvider.startup(gatewayContext);

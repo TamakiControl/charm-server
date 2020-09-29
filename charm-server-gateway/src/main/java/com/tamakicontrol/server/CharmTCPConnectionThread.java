@@ -41,7 +41,6 @@ public class CharmTCPConnectionThread extends Thread {
         try{
             StringBuilder messageBuilder = new StringBuilder();
             String line = is.readLine();
-            messageBuilder.append(line);
             int lineCount = 0;
             while(line != null && lineCount < 100){
                 logger.trace(String.format("Read From Charm Socket: %s", line));
