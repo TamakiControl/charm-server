@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  ignition-dev:
+    image: kcollins/ignition:7.0.9
+    ports:
+      - 8000:8000
+      - 8043:8043
+      - 8088:8088
+    networks:
+      - default
+      - db
+      - ignition
+    volumes:
+      - ./docker/ignition.conf:/var/lib/ignition/data/ignition.conf
+#      - ./docker/GatewayBackup.gwbk:/restore.gwbk
+#      - ignition-central-data:/var/lib/ignition/data
+    environment:
+      GATEWAY_SYSTEM_NAME: module-dev
+      GATEWAY_ADMIN_USERNAME: tamaki
+      GATEWAY_ADMIN_PASSWORD: tamaki01
+      IGNITION_EDITION: full
+      TZ: "America/Boise"
+    restart: unless-stopped
+
+  db:
+    image: mariadb:10.4
+    ports:
+      - 3306:3306
+    networks:
+      - db
+    volumes:
+      - db-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: tamaki01
+      MYSQL_DATABASE: test
+      MYSQL_USER: tamaki
+      MYSQL_PASSWORD: tamaki01
+    restart: unless-stopped
+
+networks:
+  db:
+  ignition:
+
+volumes:
+  ignition-central-data:
+  db-data:
