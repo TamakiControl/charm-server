@@ -6,10 +6,8 @@ import org.slf4j.LoggerFactory;
 
 
 import java.text.ParseException;
-import java.util.Calendar;
 import java.util.Date;
 import java.text.SimpleDateFormat;
-import java.util.StringTokenizer;
 
 public class CharmTestResultParser {
 
@@ -24,25 +22,15 @@ public class CharmTestResultParser {
             if (split.length < 155)
                 throw new ParseException("Was not Provided CSV Input", 0);
 
-
-//            StringTokenizer tokenizer = new StringTokenizer(message, ",");
-//
-//            while (tokenizer.hasMoreTokens()) {
-//                logger.debug(tokenizer.nextToken());
-//            }
-
-
             testResult.setTestOutputName(split[0].replace("<", ""));
             testResult.setStructVersion(split[1]);
             testResult.setChannelNumber(Integer.parseInt(split[2]));
             testResult.setAssay(split[3]);
 
-
             //28SEP2020,14:10:21,
             String sDate1 = split[4] + " " + split[5];
             Date date1 = new SimpleDateFormat("ddMMMyyyy hh:mm:ss").parse(sDate1); //Mon Sep 28 14:10:21 IST 2020
             testResult.setDate(date1);
-
 
             testResult.setResult(split[6]);
             testResult.setAnswer(Double.parseDouble(split[7]));
