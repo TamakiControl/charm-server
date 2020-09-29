@@ -44,4 +44,14 @@ public class CharmSettingsRecord extends PersistentRecord {
         setInt(port, _port);
     }
 
+    public static final StringField providerName = new StringField(META, "ProviderName");
+
+    public String getProviderName() {
+        return getString(providerName);
+    }
+
+    public void setProviderName(String _providerName){
+        setString(providerName, _providerName);
+    }
+
 }
