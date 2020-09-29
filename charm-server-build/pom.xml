@@ -34,6 +34,13 @@
                             <goal>modl</goal>
                         </goals>
                     </execution>
+                    <execution>
+                        <id>install-modl</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>post</goal>
+                        </goals>
+                    </execution>
                 </executions>
 
                 <configuration>
