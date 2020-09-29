@@ -13,7 +13,7 @@ import java.lang.reflect.InvocationTargetException;
 
 /**
  * POJOToTagMapper (Plain old Java Object)
- * Maps a provided java object to the simple tag provider
+ * Maps a provided java object to the simple tag provider.  This class will create/update and delete tags.
  * */
 public class POJOToTagMapper<T> {
 

@@ -1,6 +1,5 @@
 package com.tamakicontrol;
 
-
 import java.util.Date;
 
 public class CharmTestResult {
@@ -166,11 +165,18 @@ public class CharmTestResult {
     }
 
 
+
     private Double[] remissions = new Double[128];
     public Double[] getRemissions(){
         return remissions;
     }
     public void setRemissions(Double[] remissions){
+
+    private double[] remissions = new double[128];
+    public double[] getRemissions(){
+        return remissions;
+    }
+    public void setRemissions(double[] remissions){
         this.remissions = remissions;
     }
 
@@ -238,7 +244,6 @@ public class CharmTestResult {
         this.yLine = yLine;
     }
 
-
     private Double zLine;
     public Double getZLine(){
         return zLine;
@@ -246,9 +251,6 @@ public class CharmTestResult {
     public void setZLine(Double zLine){
         this.zLine = zLine;
     }
-
-
-
 
 }
 

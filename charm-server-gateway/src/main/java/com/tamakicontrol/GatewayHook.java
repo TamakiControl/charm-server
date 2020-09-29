@@ -17,7 +17,6 @@ import com.tamakicontrol.server.CharmTCPConnectionThread;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
 import java.net.Socket;
 import java.sql.SQLException;
 import java.util.Collections;
@@ -29,21 +28,25 @@ public class GatewayHook extends AbstractGatewayModuleHook {
     private GatewayContext gatewayContext;
     private CharmTCPServer charmTCPServer;
 
+    private CharmSettingsRecord settings;
+
     @Override
     public void setup(GatewayContext gatewayContext) {
         this.gatewayContext = gatewayContext;
 
         // get properties file to display webpage text
         BundleUtil.get().addBundle("charm", getClass(), "charm");
-
         CharmTagProvider.startup(gatewayContext);
-        CharmSettingsRecord settings = setupInternalDB(gatewayContext);
-        charmTCPServer = buildTCPServer(settings.getPort());
+        settings = setupInternalDB();
+
+        if(settings.isEnabled())
+            charmTCPServer = buildTCPServer(settings.getPort());
     }
 
     @Override
     public void startup(LicenseState licenseState) {
-        gatewayContext.getExecutionManager().executeOnce(charmTCPServer);
+        if(settings.isEnabled())
+            charmTCPServer.start();
     }
 
     @Override
@@ -53,55 +56,85 @@ public class GatewayHook extends AbstractGatewayModuleHook {
         BundleUtil.get().removeBundle("charm");
     }
 
-
+    /**
+     * Builds a TCP Server on a Specified Port for CHARM Readers to Connect to
+     * */
     public CharmTCPServer buildTCPServer(int port){
         return new CharmTCPServer(port) {
             @Override
             public void onSocketConnected(Socket clientSocket) {
+                // use the gateway execution manager thread pool for this
                 gatewayContext.getExecutionManager().executeOnce(new CharmTCPConnectionThread(clientSocket));
             }
         };
+    }
+
+    /**
+     * Reinitialize Charm Server (Builds and Spawns a Thread)
+     * Ensures that the thread has been shutdown and re-spawns a new thread
+     * */
+    public synchronized void reinitializeTCP(int port) {
+        if (charmTCPServer.isAlive()) {
+            charmTCPServer.shutdown();
+            try {
+                charmTCPServer.join();
+            } catch (InterruptedException e) {
+                logger.warn("TCP Server Interrupted While Waiting for Shutdown", e);
+            }
+        }
+
+        charmTCPServer = buildTCPServer(port);
+        charmTCPServer.start();
     }
 
     // <editor-fold name="Configuration">
 
     private static final int DEFAULT_CHARM_TCP_PORT = 502;
 
-    private CharmSettingsRecord setupInternalDB(GatewayContext gatewayContext){
+    /**
+     * Creates a settings record and adds a record listener to update settings if things change
+     * */
+    private CharmSettingsRecord setupInternalDB(){
 
-        verifySchema(gatewayContext);
-        maybeCreateSettings(gatewayContext);
+        verifySchema();
+        maybeCreateSettings();
 
         CharmSettingsRecord settings = gatewayContext.getLocalPersistenceInterface()
                 .find(CharmSettingsRecord.META, 0L);
 
         CharmSettingsRecord.META.addRecordListener(new IRecordListener<CharmSettingsRecord>() {
             @Override
-            public void recordUpdated(CharmSettingsRecord settings) {
+            public void recordUpdated(CharmSettingsRecord newSettings) {
                 logger.debug("Charm Settings Updated");
-                charmTCPServer.setEnabled(settings.getEnabled());
 
-                if(settings.getPort() != charmTCPServer.getPort()){
-                    charmTCPServer.shutdown();
-                    charmTCPServer = buildTCPServer(settings.getPort());
+                if(newSettings.isEnabled() && !charmTCPServer.isEnabled() ||
+                        (newSettings.getPort() != charmTCPServer.getPort())) {
+                    reinitializeTCP(newSettings.getPort());
                 }
+
+                if(!newSettings.isEnabled())
+                    charmTCPServer.shutdown();
             }
 
             @Override
             public void recordAdded(CharmSettingsRecord charmSettingsRecord) {
-                logger.info("Charm Settings Added");
+                logger.warn("Charm Settings Added");
             }
 
             @Override
             public void recordDeleted(KeyValue keyValue) {
                 logger.warn("Tamaki MES Settings Deleted");
             }
+
         });
 
         return settings;
     }
 
-    private void verifySchema(GatewayContext gatewayContext) {
+    /**
+     * Adds Charm Settings Table to Internal DB
+     * */
+    private void verifySchema() {
         try {
             gatewayContext.getSchemaUpdater().updatePersistentRecords(CharmSettingsRecord.META);
         } catch (SQLException e) {
@@ -109,19 +142,21 @@ public class GatewayHook extends AbstractGatewayModuleHook {
         }
     }
 
-    private void maybeCreateSettings(GatewayContext context) {
+    /**
+     * Adds a single database record for charm settings if it doesn't currently exist
+     * */
+    private void maybeCreateSettings() {
         logger.debug("Creating Default Charm Settings");
 
         try {
-            CharmSettingsRecord settingsRecord = context.getLocalPersistenceInterface().createNew(CharmSettingsRecord.META);
+            CharmSettingsRecord settingsRecord = gatewayContext.getLocalPersistenceInterface().createNew(CharmSettingsRecord.META);
             settingsRecord.setId(0L);
             settingsRecord.setPort(DEFAULT_CHARM_TCP_PORT);
             settingsRecord.setEnabled(true);
-            context.getSchemaUpdater().ensureRecordExists(settingsRecord);
+            gatewayContext.getSchemaUpdater().ensureRecordExists(settingsRecord);
         } catch (Exception e) {
             logger.error("Failed to add default record for Charm settings", e);
         }
-
     }
 
     private static final ConfigCategory CONFIG_CATEGORY = new ConfigCategory("charm", "charm.nav.header", 700);

@@ -12,7 +12,7 @@ public class CharmSettingsPage extends RecordEditForm {
     public static final String[] PATH = {"charm", "settings"};
 
     public CharmSettingsPage(final IConfigPage configPage) {
-        super(configPage, null, new LenientResourceModel("TamakiMES.nav.settings.panelTitle"),
+        super(configPage, null, new LenientResourceModel("charm.nav.settings.panelTitle"),
                 ((GatewayContext) Application.get()).getPersistenceInterface().find(CharmSettingsRecord.META, 0L));
     }
 
