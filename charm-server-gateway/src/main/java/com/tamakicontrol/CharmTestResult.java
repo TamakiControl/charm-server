@@ -1,6 +1,5 @@
 package com.tamakicontrol;
 
-
 import java.util.Date;
 
 public class CharmTestResult {
@@ -238,7 +237,6 @@ public class CharmTestResult {
         this.yLine = yLine;
     }
 
-
     private float zLine;
     public float getZLine(){
         return zLine;
@@ -246,9 +244,6 @@ public class CharmTestResult {
     public void setZLine(float zLine){
         this.zLine = zLine;
     }
-
-
-
 
 }
 

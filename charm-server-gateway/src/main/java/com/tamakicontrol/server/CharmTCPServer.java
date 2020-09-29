@@ -58,6 +58,9 @@ public abstract class CharmTCPServer extends Thread {
      * Close the server socket
      * */
     public void close(){
+        if(serverSocket == null)
+            return;
+
         try {
             if(!serverSocket.isClosed())
                 serverSocket.close();

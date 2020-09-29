@@ -23,6 +23,9 @@ public class CharmTagProvider {
         simpleTagProvider.configureProvider(providerConfiguration);
     }
 
+    /**
+     * Starts up the tag provider and creates and instance of the singleton
+     * */
     public static void startup(GatewayContext gatewayContext){
         if(instance != null) {
             instance = new CharmTagProvider();
@@ -38,6 +41,9 @@ public class CharmTagProvider {
         return instance;
     }
 
+    /**
+     * Shuts down the tag provider and destroys the instance of the singleton
+     * */
     public static void shutdown(){
         instance.simpleTagProvider.shutdown();
         instance = null;
