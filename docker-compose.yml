@@ -4,7 +4,7 @@ services:
   ignition-dev:
     image: kcollins/ignition:7.9.12
     ports:
-      - 502:502
+      - 8502:8502
       - 8000:8000
       - 8043:8043
       - 8088:8088

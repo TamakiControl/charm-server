@@ -28,21 +28,25 @@ public class GatewayHook extends AbstractGatewayModuleHook {
     private GatewayContext gatewayContext;
     private CharmTCPServer charmTCPServer;
 
+    private CharmSettingsRecord settings;
+
     @Override
     public void setup(GatewayContext gatewayContext) {
         this.gatewayContext = gatewayContext;
 
         // get properties file to display webpage text
         BundleUtil.get().addBundle("charm", getClass(), "charm");
-
         CharmTagProvider.startup(gatewayContext);
-        CharmSettingsRecord settings = setupInternalDB();
-        charmTCPServer = buildTCPServer(settings.getPort());
+        settings = setupInternalDB();
+
+        if(settings.isEnabled())
+            charmTCPServer = buildTCPServer(settings.getPort());
     }
 
     @Override
     public void startup(LicenseState licenseState) {
-        gatewayContext.getExecutionManager().executeOnce(charmTCPServer);
+        if(settings.isEnabled())
+            charmTCPServer.start();
     }
 
     @Override
@@ -59,9 +63,28 @@ public class GatewayHook extends AbstractGatewayModuleHook {
         return new CharmTCPServer(port) {
             @Override
             public void onSocketConnected(Socket clientSocket) {
+                // use the gateway execution manager thread pool for this
                 gatewayContext.getExecutionManager().executeOnce(new CharmTCPConnectionThread(clientSocket));
             }
         };
+    }
+
+    /**
+     * Reinitialize Charm Server (Builds and Spawns a Thread)
+     * Ensures that the thread has been shutdown and re-spawns a new thread
+     * */
+    public synchronized void reinitializeTCP(int port) {
+        if (charmTCPServer.isAlive()) {
+            charmTCPServer.shutdown();
+            try {
+                charmTCPServer.join();
+            } catch (InterruptedException e) {
+                logger.warn("TCP Server Interrupted While Waiting for Shutdown", e);
+            }
+        }
+
+        charmTCPServer = buildTCPServer(port);
+        charmTCPServer.start();
     }
 
     // <editor-fold name="Configuration">
@@ -81,25 +104,28 @@ public class GatewayHook extends AbstractGatewayModuleHook {
 
         CharmSettingsRecord.META.addRecordListener(new IRecordListener<CharmSettingsRecord>() {
             @Override
-            public void recordUpdated(CharmSettingsRecord settings) {
+            public void recordUpdated(CharmSettingsRecord newSettings) {
                 logger.debug("Charm Settings Updated");
-                charmTCPServer.setEnabled(settings.getEnabled());
 
-                if(settings.getPort() != charmTCPServer.getPort()){
-                    charmTCPServer.shutdown();
-                    charmTCPServer = buildTCPServer(settings.getPort());
+                if(newSettings.isEnabled() && !charmTCPServer.isEnabled() ||
+                        (newSettings.getPort() != charmTCPServer.getPort())) {
+                    reinitializeTCP(newSettings.getPort());
                 }
+
+                if(!newSettings.isEnabled())
+                    charmTCPServer.shutdown();
             }
 
             @Override
             public void recordAdded(CharmSettingsRecord charmSettingsRecord) {
-                logger.info("Charm Settings Added");
+                logger.warn("Charm Settings Added");
             }
 
             @Override
             public void recordDeleted(KeyValue keyValue) {
                 logger.warn("Tamaki MES Settings Deleted");
             }
+
         });
 
         return settings;

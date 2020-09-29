@@ -24,7 +24,7 @@ public class CharmSettingsRecord extends PersistentRecord {
 
     public static final BooleanField enabled = new BooleanField(META, "Enabled");
 
-    public Boolean getEnabled() {
+    public Boolean isEnabled() {
         return getBoolean(enabled);
     }
 
@@ -51,5 +51,10 @@ public class CharmSettingsRecord extends PersistentRecord {
     public void setProviderName(String _providerName) {
         setString(providerName, _providerName);
     }
+
+    // create categories for our record entries, getting titles from the HCSettingsRecord.properties, and
+    // ordering through integer ranking
+    static final Category General = new Category("charm.Category.General", 1000)
+            .include(enabled).include(port).include(providerName);
 
 }

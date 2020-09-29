@@ -12,6 +12,11 @@ import java.io.InputStreamReader;
 import java.net.Socket;
 import java.text.ParseException;
 
+/**
+ * Whenever a TCP connection is made to the Server, this thread will spawn and handle the
+ * result.  This keeps the server free to continue accepting more connections should
+ * more than 1 CHARM reader send data at once.
+ * */
 public class CharmTCPConnectionThread extends Thread {
 
     private static final Logger logger = LoggerFactory.getLogger(CharmTCPConnectionThread.class);
@@ -23,6 +28,7 @@ public class CharmTCPConnectionThread extends Thread {
 
     @Override
     public void run() {
+        logger.trace("Starting Charm TCP Connection Thread");
         BufferedReader is;
 
         try{
