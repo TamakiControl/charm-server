@@ -4,7 +4,7 @@ import com.inductiveautomation.ignition.gateway.localdb.persistence.*;
 
 public class CharmSettingsRecord extends PersistentRecord {
 
-    public static final RecordMeta<CharmSettingsRecord> META = new RecordMeta<>(CharmSettingsRecord.class, "Charm Server Settings")
+    public static final RecordMeta<CharmSettingsRecord> META = new RecordMeta<>(CharmSettingsRecord.class, "CharmServerSettings")
             .setNounKey("CharmSettingsRecord.Noun").setNounPluralKey("CharmSettingsRecord.Noun.Plural");
 
     @Override

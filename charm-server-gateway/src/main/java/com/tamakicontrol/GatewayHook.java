@@ -36,9 +36,8 @@ public class GatewayHook extends AbstractGatewayModuleHook {
         BundleUtil.get().addBundle("charm", getClass(), "charm");
 
         CharmTagProvider.startup(gatewayContext);
-        //CharmSettingsRecord settings = setupInternalDB();
-        //charmTCPServer = buildTCPServer(settings.getPort());
-        charmTCPServer = buildTCPServer(DEFAULT_CHARM_TCP_PORT);
+        CharmSettingsRecord settings = setupInternalDB();
+        charmTCPServer = buildTCPServer(settings.getPort());
     }
 
     @Override

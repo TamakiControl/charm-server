@@ -165,11 +165,11 @@ public class CharmTestResult {
     }
 
 
-    private float[] remissions = new float[128];
-    public float[] getRemissions(){
+    private double[] remissions = new double[128];
+    public double[] getRemissions(){
         return remissions;
     }
-    public void setRemissions(float[] remissions){
+    public void setRemissions(double[] remissions){
         this.remissions = remissions;
     }
 
@@ -220,11 +220,11 @@ public class CharmTestResult {
     }
 
 
-    private float interpString;
-    public float getInterpString(){
+    private String interpString;
+    public String getInterpString(){
         return interpString;
     }
-    public void setInterpString(float interpString){
+    public void setInterpString(String interpString){
         this.interpString = interpString;
     }
 
