@@ -59,11 +59,11 @@ public class CharmTestResult {
     }
 
 
-    private float answer;
-    public float getAnswer(){
+    private Double answer;
+    public Double getAnswer(){
         return answer;
     }
-    public void setAnswer(float answer){
+    public void setAnswer(Double answer){
         this.answer = answer;
     }
 
@@ -157,93 +157,93 @@ public class CharmTestResult {
     }
 
 
-    private float testTemperature;
-    public float getTestTemperature(){
+    private Double testTemperature;
+    public Double getTestTemperature(){
         return testTemperature;
     }
-    public void setTestTemperature(float testTemperature){
+    public void setTestTemperature(Double testTemperature){
         this.testTemperature = testTemperature;
     }
 
 
-    private float[] remissions = new float[128];
-    public float[] getRemissions(){
+    private Double[] remissions = new Double[128];
+    public Double[] getRemissions(){
         return remissions;
     }
-    public void setRemissions(float[] remissions){
+    public void setRemissions(Double[] remissions){
         this.remissions = remissions;
     }
 
 
 
-    private float tipRed;
-    public float getTipRed(){
+    private Double tipRed;
+    public Double getTipRed(){
         return tipRed;
     }
-    public void setTipRed(float tipRed){
+    public void setTipRed(Double tipRed){
         this.tipRed = tipRed;
     }
 
 
-    private float tipGreen;
-    public float getTipGreen(){
+    private Double tipGreen;
+    public Double getTipGreen(){
         return tipGreen;
     }
-    public void setTipGreen(float tipGreen){
+    public void setTipGreen(Double tipGreen){
         this.tipGreen = tipGreen;
     }
 
 
-    private float tipBlue;
-    public float getTipBlue(){
+    private Double tipBlue;
+    public Double getTipBlue(){
         return tipBlue;
     }
-    public void setTipBlue(float tipBlue){
+    public void setTipBlue(Double tipBlue){
         this.tipBlue = tipBlue;
     }
 
 
-    private float dirt;
-    public float getDirt(){
+    private Double dirt;
+    public Double getDirt(){
         return dirt;
     }
-    public void setDirt(float dirt){
+    public void setDirt(Double dirt){
         this.dirt = dirt;
     }
 
 
-    private float flow;
-    public float getFlow(){
+    private Double flow;
+    public Double getFlow(){
         return flow;
     }
-    public void setFlow(float flow){
+    public void setFlow(Double flow){
         this.flow = flow;
     }
 
 
-    private float interpString;
-    public float getInterpString(){
+    private String interpString;
+    public String getInterpString(){
         return interpString;
     }
-    public void setInterpString(float interpString){
+    public void setInterpString(String interpString){
         this.interpString = interpString;
     }
 
 
-    private float yLine;
-    public float getYLine(){
+    private Double yLine;
+    public Double getYLine(){
         return yLine;
     }
-    public void setYLine(float yLine){
+    public void setYLine(Double yLine){
         this.yLine = yLine;
     }
 
 
-    private float zLine;
-    public float getZLine(){
+    private Double zLine;
+    public Double getZLine(){
         return zLine;
     }
-    public void setZLine(float zLine){
+    public void setZLine(Double zLine){
         this.zLine = zLine;
     }
 
@@ -284,7 +284,7 @@ testLINE (maximum of 15 bytes),
 XLine (maximum of 15 bytes),
 Interpretation (1 byte),
 TestTemperature (maximum of 5 bytes),
-Remmisions[128]); (128 floating point values with each one being a maximum of 6 bytes[3.2 format]
+Remmisions[128]); (128 Doubleing point values with each one being a maximum of 6 bytes[3.2 format]
 followed by a comma),
 TipRed (maximum of 4 bytes),
 TipGreen (maximum of 4 bytes),
