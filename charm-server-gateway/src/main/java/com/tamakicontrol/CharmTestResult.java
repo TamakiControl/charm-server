@@ -1,6 +1,8 @@
 package com.tamakicontrol;
 
 
+import java.util.Date;
+
 public class CharmTestResult {
 
     private String testOutputName;
@@ -39,11 +41,11 @@ public class CharmTestResult {
     }
 
 
-    private String date;
-    public String getDate(){
+    private Date date;
+    public Date getDate(){
         return date;
     }
-    public void setDate(String date){
+    public void setDate(Date date){
         this.date = date;
     }
 
