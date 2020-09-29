@@ -72,8 +72,8 @@ public class CharmTestResultParser {
             testResult.setDirt(Double.parseDouble(split[150]));
             testResult.setFlow(Double.parseDouble(split[151]));
             testResult.setInterpString(split[152]);
-            testResult.setYLine(Double.parseDouble(split[153]));
-            testResult.setZLine(Double.parseDouble(split[154]));
+            testResult.setY_Line(Double.parseDouble(split[153]));
+            testResult.setZ_Line(Double.parseDouble(split[154].replace(">", "")));
 
         }catch (Exception e){
             logger.error("Failed to parse", e);

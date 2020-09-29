@@ -19,7 +19,7 @@ public class CharmTestResultParserTest {
             "43.57,48.72,74.83,90.82,105.33,113.63,117.68,119.41,118.67,119.50,121.41,122.76,125.94,124.94,125.50,125.85," +
             "129.48,129.73,129.13,131.41,134.76,137.57,136.37,138.33,138.82,138.84,146.50,158.10,185.48,199.62,215.17," +
             "231.55,241.71,232.00,234.09,237.75,249.27," +
-            "475,666,985,423,67,,0,0\n";
+            "475,666,985,423,67,,0,0>\n";
 
     @Test
     public void test1() throws Exception{
@@ -64,8 +64,8 @@ public class CharmTestResultParserTest {
         testResult.setDirt(423.0);
         testResult.setFlow(67.0);
         testResult.setInterpString("");
-        testResult.setYLine(0.0);
-        testResult.setZLine(0.0);
+        testResult.setY_Line(0.0);
+        testResult.setZ_Line(0.0);
 
         CharmTestResult parsedResult = CharmTestResultParser.parse(testString);
         assert testResult.equals(parsedResult);

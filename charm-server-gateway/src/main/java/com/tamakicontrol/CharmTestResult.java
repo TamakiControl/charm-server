@@ -12,6 +12,7 @@ import java.util.Date;
 
 public class CharmTestResult {
 
+    @PublishTag(name="TestOutputName", dataType=DataType.String)
     private String testOutputName;
     public String getTestOutputName(){
         return testOutputName;
@@ -20,7 +21,7 @@ public class CharmTestResult {
         this.testOutputName = testOutputName;
     }
 
-
+    @PublishTag(name="StructVersion", dataType=DataType.String)
     private String structVersion;
     public String getStructVersion(){
         return structVersion;
@@ -29,7 +30,7 @@ public class CharmTestResult {
         this.structVersion = structVersion;
     }
 
-
+    @PublishTag(name="ChannelNumber", dataType=DataType.Int4)
     private int channelNumber;
     public int getChannelNumber(){
         return channelNumber;
@@ -38,7 +39,7 @@ public class CharmTestResult {
         this.channelNumber = channelNumber;
     }
 
-
+    @PublishTag(name="Assay", dataType=DataType.String)
     private String assay;
     public String getAssay(){
         return assay;
@@ -47,7 +48,7 @@ public class CharmTestResult {
         this.assay = assay;
     }
 
-
+    @PublishTag(name="Date", dataType=DataType.DateTime)
     private Date date;
     public Date getDate(){
         return date;
@@ -57,7 +58,7 @@ public class CharmTestResult {
     }
 
 
-    @PublishTag(name="Answer", dataType=DataType.String)
+    @PublishTag(name="Result", dataType=DataType.String)
     private String result;
     public String getResult(){
         return result;
@@ -85,7 +86,7 @@ public class CharmTestResult {
         this.unitSN = unitSN;
     }
 
-
+    @PublishTag(name="LotNumber", dataType=DataType.Int4)
     private int lotNumber;
     public int getLotNumber(){
         return lotNumber;
@@ -94,7 +95,7 @@ public class CharmTestResult {
         this.lotNumber = lotNumber;
     }
 
-
+    @PublishTag(name="SampleID", dataType=DataType.Int4)
     private int sampleID;
     public int getSampleID(){
         return sampleID;
@@ -103,7 +104,7 @@ public class CharmTestResult {
         this.sampleID = sampleID;
     }
 
-
+    @PublishTag(name="OperatorID", dataType=DataType.Int4)
     private int operatorID;
     public int getOperatorID(){
         return operatorID;
@@ -112,7 +113,7 @@ public class CharmTestResult {
         this.operatorID = operatorID;
     }
 
-
+    @PublishTag(name="Mode", dataType=DataType.Int4)
     private int mode;
     public int getMode(){
         return mode;
@@ -121,7 +122,7 @@ public class CharmTestResult {
         this.mode = mode;
     }
 
-
+    @PublishTag(name="FailCode", dataType=DataType.Int4)
     private int failCode;
     public int getFailCode(){
         return failCode;
@@ -130,7 +131,7 @@ public class CharmTestResult {
         this.failCode = failCode;
     }
 
-
+    @PublishTag(name="ControlLINE", dataType=DataType.Int4)
     private int controlLINE;
     public int getControlLINE(){
         return controlLINE;
@@ -139,7 +140,7 @@ public class CharmTestResult {
         this.controlLINE = controlLINE;
     }
 
-
+    @PublishTag(name="TestLINE", dataType=DataType.Int4)
     private int testLINE;
     public int getTestLINE(){
         return testLINE;
@@ -148,6 +149,7 @@ public class CharmTestResult {
         this.testLINE = testLINE;
     }
 
+    @PublishTag(name="XLine", dataType= DataType.Float8)
     private Double XLine;
     public Double getXLine(){
         return XLine;
@@ -156,7 +158,7 @@ public class CharmTestResult {
         this.XLine = XLine;
     }
 
-
+    @PublishTag(name="Interpretation", dataType= DataType.String)
     private String interpretation;
     public String getInterpretation(){
         return interpretation;
@@ -165,7 +167,7 @@ public class CharmTestResult {
         this.interpretation = interpretation;
     }
 
-
+    @PublishTag(name="TestTemperature", dataType= DataType.Float8)
     private Double testTemperature;
     public Double getTestTemperature(){
         return testTemperature;
@@ -175,7 +177,7 @@ public class CharmTestResult {
     }
 
 
-
+    @PublishTag(name="Remissions", dataType= DataType.Float8Array)
     private Double[] remissions = new Double[128];
     public Double[] getRemissions(){
         return remissions;
@@ -184,6 +186,7 @@ public class CharmTestResult {
         this.remissions = remissions;
     }
 
+    @PublishTag(name="TipRed", dataType= DataType.Float8)
     private Double tipRed;
     public Double getTipRed(){
         return tipRed;
@@ -192,7 +195,7 @@ public class CharmTestResult {
         this.tipRed = tipRed;
     }
 
-
+    @PublishTag(name="TipGreen", dataType= DataType.Float8)
     private Double tipGreen;
     public Double getTipGreen(){
         return tipGreen;
@@ -201,7 +204,7 @@ public class CharmTestResult {
         this.tipGreen = tipGreen;
     }
 
-
+    @PublishTag(name="TipBlue", dataType= DataType.Float8)
     private Double tipBlue;
     public Double getTipBlue(){
         return tipBlue;
@@ -210,7 +213,7 @@ public class CharmTestResult {
         this.tipBlue = tipBlue;
     }
 
-
+    @PublishTag(name="Dirt", dataType= DataType.Float8)
     private Double dirt;
     public Double getDirt(){
         return dirt;
@@ -219,7 +222,7 @@ public class CharmTestResult {
         this.dirt = dirt;
     }
 
-
+    @PublishTag(name="Flow", dataType= DataType.Float8)
     private Double flow;
     public Double getFlow(){
         return flow;
@@ -228,7 +231,7 @@ public class CharmTestResult {
         this.flow = flow;
     }
 
-
+    @PublishTag(name="InterpString", dataType= DataType.String)
     private String interpString;
     public String getInterpString(){
         return interpString;
@@ -237,20 +240,27 @@ public class CharmTestResult {
         this.interpString = interpString;
     }
 
-    private Double yLine;
-    public Double getYLine(){
-        return yLine;
-    }
-    public void setYLine(Double yLine){
-        this.yLine = yLine;
+    @PublishTag(name="YLine", dataType= DataType.Float8)
+    private Double y_Line;
+
+
+    @PublishTag(name="ZLine", dataType= DataType.Float8)
+    private Double z_Line;
+
+    public Double getY_Line() {
+        return y_Line;
     }
 
-    private Double zLine;
-    public Double getZLine(){
-        return zLine;
+    public void setY_Line(Double y_Line) {
+        this.y_Line = y_Line;
     }
-    public void setZLine(Double zLine){
-        this.zLine = zLine;
+
+    public Double getZ_Line() {
+        return z_Line;
+    }
+
+    public void setZ_Line(Double z_Line) {
+        this.z_Line = z_Line;
     }
 
     @Override
@@ -290,8 +300,8 @@ public class CharmTestResult {
         if (dirt != null ? !dirt.equals(that.dirt) : that.dirt != null) return false;
         if (flow != null ? !flow.equals(that.flow) : that.flow != null) return false;
         if (interpString != null ? !interpString.equals(that.interpString) : that.interpString != null) return false;
-        if (yLine != null ? !yLine.equals(that.yLine) : that.yLine != null) return false;
-        return zLine != null ? zLine.equals(that.zLine) : that.zLine == null;
+        if (y_Line != null ? !y_Line.equals(that.y_Line) : that.y_Line != null) return false;
+        return z_Line != null ? z_Line.equals(that.z_Line) : that.z_Line == null;
     }
 
     @Override
@@ -321,8 +331,8 @@ public class CharmTestResult {
         result1 = 31 * result1 + (dirt != null ? dirt.hashCode() : 0);
         result1 = 31 * result1 + (flow != null ? flow.hashCode() : 0);
         result1 = 31 * result1 + (interpString != null ? interpString.hashCode() : 0);
-        result1 = 31 * result1 + (yLine != null ? yLine.hashCode() : 0);
-        result1 = 31 * result1 + (zLine != null ? zLine.hashCode() : 0);
+        result1 = 31 * result1 + (y_Line != null ? y_Line.hashCode() : 0);
+        result1 = 31 * result1 + (z_Line != null ? z_Line.hashCode() : 0);
         return result1;
     }
 }
