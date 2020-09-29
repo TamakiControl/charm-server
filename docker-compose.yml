@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   ignition-dev:
-    image: kcollins/ignition:7.0.9
+    image: kcollins/ignition:7.9.9
     ports:
       - 8000:8000
       - 8043:8043
@@ -12,9 +12,9 @@ services:
       - db
       - ignition
     volumes:
-      - ./docker/ignition.conf:/var/lib/ignition/data/ignition.conf
+      - ./docker/ignition-7-9.conf:/var/lib/ignition/data/ignition.conf
 #      - ./docker/GatewayBackup.gwbk:/restore.gwbk
-#      - ignition-central-data:/var/lib/ignition/data
+#      - ignition-dev-data:/var/lib/ignition/data
     environment:
       GATEWAY_SYSTEM_NAME: module-dev
       GATEWAY_ADMIN_USERNAME: tamaki

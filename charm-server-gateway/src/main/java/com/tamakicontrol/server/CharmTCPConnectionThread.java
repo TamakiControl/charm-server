@@ -15,8 +15,8 @@ import java.text.ParseException;
 public class CharmTCPConnectionThread extends Thread {
 
     private static final Logger logger = LoggerFactory.getLogger(CharmTCPConnectionThread.class);
-
     private final Socket socket;
+
     public CharmTCPConnectionThread(Socket socket){
         this.socket = socket;
     }
@@ -33,14 +33,15 @@ public class CharmTCPConnectionThread extends Thread {
         }
 
         try{
-            // todo this is a potential security problem if somebody sent us a very very very long message.  Need to limit the size somehow
             StringBuilder messageBuilder = new StringBuilder();
             String line = is.readLine();
             messageBuilder.append(line);
-            while(line != null){
+            int lineCount = 0;
+            while(line != null && lineCount < 100){
                 logger.trace(String.format("Read From Charm Socket: %s", line));
                 messageBuilder.append(line);
                 line = is.readLine();
+                lineCount++;
             }
 
             // build test result object from raw TCP data

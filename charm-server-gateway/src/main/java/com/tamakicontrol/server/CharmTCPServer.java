@@ -1,14 +1,12 @@
 package com.tamakicontrol.server;
 
-import org.python.modules._py_compile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public abstract class CharmTCPServer implements Runnable {
+public abstract class CharmTCPServer extends Thread {
 
     private static final Logger logger = LoggerFactory.getLogger(CharmTCPServer.class);
     private ServerSocket serverSocket;
@@ -20,12 +18,13 @@ public abstract class CharmTCPServer implements Runnable {
 
     private boolean enabled = true;
     public synchronized void setEnabled(final boolean enabled){
-        this.enabled = true;
+        this.enabled = enabled;
     }
 
     public boolean getEnabled(){
         return enabled;
     }
+
 
     public synchronized void shutdown(){
         setEnabled(false);
@@ -40,7 +39,7 @@ public abstract class CharmTCPServer implements Runnable {
     public void run(){
         try {
             serverSocket = new ServerSocket(port);
-            logger.debug(String.format("CHARM Server Listeneing on Port %d", port));
+            logger.debug(String.format("CHARM Server Listening on Port %d", port));
 
             while(enabled){
                 Socket socket = serverSocket.accept();
@@ -50,13 +49,18 @@ public abstract class CharmTCPServer implements Runnable {
         } catch (IOException e) {
             logger.error("IOException While Listening on Server", e);
         } finally {
+            logger.info("CHARM Server Socket Shutting Down");
             close();
         }
     }
 
+    /**
+     * Close the server socket
+     * */
     public void close(){
         try {
-            serverSocket.close();
+            if(!serverSocket.isClosed())
+                serverSocket.close();
         }catch (IOException e){
             logger.warn("CHARM Server Socket Did not Close Neatly", e);
         }
