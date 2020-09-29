@@ -48,15 +48,6 @@ public class CharmTestResult {
     }
 
 
-    private String time;
-    public String getTime(){
-        return time;
-    }
-    public void setTime(String time){
-        this.time = time;
-    }
-
-
     private String result;
     public String getResult(){
         return result;
@@ -173,11 +164,11 @@ public class CharmTestResult {
     }
 
 
-    private float remissions;
-    public float getRemissions(){
+    private float[] remissions = new float[128];
+    public float[] getRemissions(){
         return remissions;
     }
-    public void setRemissions(float remissions){
+    public void setRemissions(float[] remissions){
         this.remissions = remissions;
     }
 
