@@ -53,7 +53,7 @@ public class CharmTCPConnectionThread extends Thread {
             CharmTestResult testResult = CharmTestResultParser.parse(messageBuilder.toString());
 
             // publish data from test result to tag provider
-            String tagRootPath = String.format("Unit %d", testResult.getUnitSN());
+            String tagRootPath = String.format("Unit %d/", testResult.getUnitSN());
             POJOToTagMapper<CharmTestResult> resultMapper = new POJOToTagMapper<>(tagRootPath, testResult);
             resultMapper.configureTags();
             resultMapper.updateTags();
