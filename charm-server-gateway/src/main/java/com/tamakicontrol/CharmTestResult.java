@@ -1,8 +1,12 @@
 package com.tamakicontrol;
 
+import com.inductiveautomation.ignition.common.sqltags.model.types.DataType;
+import com.tamakicontrol.utils.PublishTag;
+
 // todo
 public class CharmTestResult {
 
+    @PublishTag(name="serialNo", dataType= DataType.Int4)
     private int serialNo;
 
     public int getSerialNo(){

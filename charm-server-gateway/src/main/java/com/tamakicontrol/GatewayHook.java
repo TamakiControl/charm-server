@@ -17,7 +17,6 @@ import com.tamakicontrol.server.CharmTCPConnectionThread;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
 import java.net.Socket;
 import java.sql.SQLException;
 import java.util.Collections;
@@ -37,8 +36,9 @@ public class GatewayHook extends AbstractGatewayModuleHook {
         BundleUtil.get().addBundle("charm", getClass(), "charm");
 
         CharmTagProvider.startup(gatewayContext);
-        CharmSettingsRecord settings = setupInternalDB(gatewayContext);
-        charmTCPServer = buildTCPServer(settings.getPort());
+        //CharmSettingsRecord settings = setupInternalDB();
+        //charmTCPServer = buildTCPServer(settings.getPort());
+        charmTCPServer = buildTCPServer(DEFAULT_CHARM_TCP_PORT);
     }
 
     @Override
@@ -53,7 +53,9 @@ public class GatewayHook extends AbstractGatewayModuleHook {
         BundleUtil.get().removeBundle("charm");
     }
 
-
+    /**
+     * Builds a TCP Server on a Specified Port for CHARM Readers to Connect to
+     * */
     public CharmTCPServer buildTCPServer(int port){
         return new CharmTCPServer(port) {
             @Override
@@ -67,10 +69,13 @@ public class GatewayHook extends AbstractGatewayModuleHook {
 
     private static final int DEFAULT_CHARM_TCP_PORT = 502;
 
-    private CharmSettingsRecord setupInternalDB(GatewayContext gatewayContext){
+    /**
+     * Creates a settings record and adds a record listener to update settings if things change
+     * */
+    private CharmSettingsRecord setupInternalDB(){
 
-        verifySchema(gatewayContext);
-        maybeCreateSettings(gatewayContext);
+        verifySchema();
+        maybeCreateSettings();
 
         CharmSettingsRecord settings = gatewayContext.getLocalPersistenceInterface()
                 .find(CharmSettingsRecord.META, 0L);
@@ -101,7 +106,10 @@ public class GatewayHook extends AbstractGatewayModuleHook {
         return settings;
     }
 
-    private void verifySchema(GatewayContext gatewayContext) {
+    /**
+     * Adds Charm Settings Table to Internal DB
+     * */
+    private void verifySchema() {
         try {
             gatewayContext.getSchemaUpdater().updatePersistentRecords(CharmSettingsRecord.META);
         } catch (SQLException e) {
@@ -109,19 +117,21 @@ public class GatewayHook extends AbstractGatewayModuleHook {
         }
     }
 
-    private void maybeCreateSettings(GatewayContext context) {
+    /**
+     * Adds a single database record for charm settings if it doesn't currently exist
+     * */
+    private void maybeCreateSettings() {
         logger.debug("Creating Default Charm Settings");
 
         try {
-            CharmSettingsRecord settingsRecord = context.getLocalPersistenceInterface().createNew(CharmSettingsRecord.META);
+            CharmSettingsRecord settingsRecord = gatewayContext.getLocalPersistenceInterface().createNew(CharmSettingsRecord.META);
             settingsRecord.setId(0L);
             settingsRecord.setPort(DEFAULT_CHARM_TCP_PORT);
             settingsRecord.setEnabled(true);
-            context.getSchemaUpdater().ensureRecordExists(settingsRecord);
+            gatewayContext.getSchemaUpdater().ensureRecordExists(settingsRecord);
         } catch (Exception e) {
             logger.error("Failed to add default record for Charm settings", e);
         }
-
     }
 
     private static final ConfigCategory CONFIG_CATEGORY = new ConfigCategory("charm", "charm.nav.header", 700);

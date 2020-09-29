@@ -17,7 +17,7 @@ import java.util.Random;
 public class CharmTCPServerTest {
 
     @BeforeAll
-    public void setLoggers(){
+    public static void setLoggers(){
         System.setProperty("org.slf4j.simpleLogger.logFile", "System.out");
         Logger slf4j = (Logger) LoggerFactory.getLogger("com.tamakicontrol");
         slf4j.setLevel(Level.TRACE);
@@ -87,11 +87,9 @@ public class CharmTCPServerTest {
         socket.close();
     }
 
-
-    @Test
     public void test3() throws Exception {
 
-        server1.start();
+        //server1.start();
         String hostName = "127.0.0.1";
         int portNumber = 502;
 
