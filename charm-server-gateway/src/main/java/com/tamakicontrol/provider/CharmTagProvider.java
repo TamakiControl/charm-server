@@ -23,17 +23,20 @@ public class CharmTagProvider {
         simpleTagProvider.configureProvider(providerConfiguration);
     }
 
+    public static void setup(){
+        if(instance == null) {
+            instance = new CharmTagProvider();
+        }
+    }
+
     /**
      * Starts up the tag provider and creates and instance of the singleton
      * */
     public static void startup(GatewayContext gatewayContext){
-        if(instance == null) {
-            instance = new CharmTagProvider();
-            try {
-                instance.simpleTagProvider.startup(gatewayContext);
-            } catch (Exception e) {
-                logger.error("Error Starting up CHARM Tag Provider", e);
-            }
+        try {
+            instance.simpleTagProvider.startup(gatewayContext);
+        } catch (Exception e) {
+            logger.error("Error Starting up CHARM Tag Provider", e);
         }
     }
 

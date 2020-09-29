@@ -36,7 +36,7 @@ public class GatewayHook extends AbstractGatewayModuleHook {
 
         // get properties file to display webpage text
         BundleUtil.get().addBundle("charm", getClass(), "charm");
-        CharmTagProvider.startup(gatewayContext);
+        CharmTagProvider.setup();
         settings = setupInternalDB();
 
         if(settings.isEnabled())
@@ -47,6 +47,8 @@ public class GatewayHook extends AbstractGatewayModuleHook {
     public void startup(LicenseState licenseState) {
         if(settings.isEnabled())
             charmTCPServer.start();
+
+        CharmTagProvider.startup(gatewayContext);
     }
 
     @Override
