@@ -78,6 +78,6 @@ public abstract class CharmTCPServer extends Thread {
         }
     }
 
-    public abstract void onSocketConnected(Socket clientSocket) throws IOException;
+    public abstract void onSocketConnected(final Socket clientSocket) throws IOException;
 
 }

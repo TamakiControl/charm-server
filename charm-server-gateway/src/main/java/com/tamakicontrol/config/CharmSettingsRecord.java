@@ -4,7 +4,7 @@ import com.inductiveautomation.ignition.gateway.localdb.persistence.*;
 
 public class CharmSettingsRecord extends PersistentRecord {
 
-    public static final RecordMeta<CharmSettingsRecord> META = new RecordMeta<>(CharmSettingsRecord.class, "CharmServerSettings")
+    public static final RecordMeta<CharmSettingsRecord> META = new RecordMeta<>(CharmSettingsRecord.class, "CharmSettingsRecord")
             .setNounKey("CharmSettingsRecord.Noun").setNounPluralKey("CharmSettingsRecord.Noun.Plural");
 
     @Override
@@ -42,19 +42,9 @@ public class CharmSettingsRecord extends PersistentRecord {
         setInt(port, _port);
     }
 
-    public static final StringField providerName = new StringField(META, "ProviderName");
-
-    public String getProviderName() {
-        return getString(providerName);
-    }
-
-    public void setProviderName(String _providerName) {
-        setString(providerName, _providerName);
-    }
-
     // create categories for our record entries, getting titles from the HCSettingsRecord.properties, and
     // ordering through integer ranking
-    static final Category General = new Category("charm.Category.General", 1000)
-            .include(enabled).include(port).include(providerName);
+    static final Category General = new Category("CharmSettingsRecord.Category.General", 1000)
+            .include(enabled, port);
 
 }
