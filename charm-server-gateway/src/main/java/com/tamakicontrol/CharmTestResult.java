@@ -10,13 +10,16 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 import java.util.Arrays;
 import java.util.Date;
 
+// Creating class to store data for EZ reader readings.
 public class CharmTestResult {
 
     @PublishTag(name="TestOutputName", dataType=DataType.String)
     private String testOutputName;
+    // getTestOutputName() can return value stored in testOutputName variable
     public String getTestOutputName(){
         return testOutputName;
     }
+    // setTestOutputName(String testOutputName) can assign a value to testOutputName
     public void setTestOutputName(String testOutputName){
         this.testOutputName = testOutputName;
     }
@@ -175,7 +178,6 @@ public class CharmTestResult {
     public void setTestTemperature(Double testTemperature){
         this.testTemperature = testTemperature;
     }
-
 
     @PublishTag(name="Remissions", dataType= DataType.Float8Array)
     private Double[] remissions = new Double[128];

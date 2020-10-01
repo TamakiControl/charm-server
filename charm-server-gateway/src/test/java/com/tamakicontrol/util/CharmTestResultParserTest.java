@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+// CharmTestResultParserTest is to be used for testing if our code can perform properly.
 public class CharmTestResultParserTest {
 
     private static final String testString = "<28092002.020,A6,2,SL-3,28SEP2020,14:10:21,Negative,-1547,6182,181,79," +
