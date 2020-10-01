@@ -66,9 +66,11 @@ public class CharmTestResult {
 
     @PublishTag(name="TestOutputName", dataType=DataType.String)
     private String testOutputName;
+    // getTestOutputName() can return value stored in testOutputName variable
     public String getTestOutputName(){
         return testOutputName;
     }
+    // setTestOutputName(String testOutputName) can assign a value to testOutputName
     public void setTestOutputName(String testOutputName){
         this.testOutputName = testOutputName;
     }
