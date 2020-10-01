@@ -64,7 +64,7 @@ public class GatewayHook extends AbstractGatewayModuleHook {
     public CharmTCPServer buildTCPServer(int port){
         return new CharmTCPServer(port) {
             @Override
-            public void onSocketConnected(Socket clientSocket) {
+            public void onSocketConnected(final Socket clientSocket) {
                 // use the gateway execution manager thread pool for this
                 gatewayContext.getExecutionManager().executeOnce(new CharmTCPConnectionThread(clientSocket));
             }

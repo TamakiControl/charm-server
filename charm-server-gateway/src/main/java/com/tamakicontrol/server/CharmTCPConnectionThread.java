@@ -17,7 +17,7 @@ import java.text.ParseException;
  * result.  This keeps the server free to continue accepting more connections should
  * more than 1 CHARM reader send data at once.
  * */
-public class CharmTCPConnectionThread extends Thread {
+public class CharmTCPConnectionThread implements Runnable {
 
     private static final Logger logger = LoggerFactory.getLogger(CharmTCPConnectionThread.class);
     private final Socket socket;
