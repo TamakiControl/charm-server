@@ -54,8 +54,10 @@
                     <moduleId>com.tamakicontrol.charm-server</moduleId>
                     <moduleName>${project.parent.name}</moduleName>
                     <moduleDescription>${project.description}</moduleDescription>
-                    <moduleVersion>1.0.0-SNAPSHOT</moduleVersion>
-                    <requiredIgnitionVersion>7.9.9</requiredIgnitionVersion>
+                    <moduleVersion>1.9.0</moduleVersion>
+                    <requiredIgnitionVersion>7.9.10</requiredIgnitionVersion>
+                    <licenseFile>license.html</licenseFile>
+                    <documentationFile>doc/index.html</documentationFile>
 
                     <hooks>
                         <hook>

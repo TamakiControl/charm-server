@@ -58,6 +58,11 @@ public class GatewayHook extends AbstractGatewayModuleHook {
         BundleUtil.get().removeBundle("charm");
     }
 
+    @Override
+    public boolean isFreeModule() {
+        return true;
+    }
+
     /**
      * Builds a TCP Server on a Specified Port for CHARM Readers to Connect to
      * */
