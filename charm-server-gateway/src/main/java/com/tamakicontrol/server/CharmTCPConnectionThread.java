@@ -53,10 +53,17 @@ public class CharmTCPConnectionThread implements Runnable {
             CharmTestResult testResult = CharmTestResultParser.parse(messageBuilder.toString());
 
             // publish data from test result to tag provider
-            String tagRootPath = String.format("Unit %d/", testResult.getUnitSN());
-            POJOToTagMapper<CharmTestResult> resultMapper = new POJOToTagMapper<>(tagRootPath, testResult);
-            resultMapper.configureTags();
-            resultMapper.updateTags();
+            String tagRootPath1 = "Last Result/";
+            POJOToTagMapper<CharmTestResult> resultMapper1 = new POJOToTagMapper<>(tagRootPath1, testResult);
+
+            String tagRootPath2 = String.format("Unit %d/", testResult.getUnitSN());
+            POJOToTagMapper<CharmTestResult> resultMapper2 = new POJOToTagMapper<>(tagRootPath2, testResult);
+
+            resultMapper1.configureTags();
+            resultMapper1.updateTags();
+
+            resultMapper2.configureTags();
+            resultMapper2.updateTags();
 
         }catch (IOException e){
             logger.error("IOException While Handling Input from Charm TCP Socket", e);
