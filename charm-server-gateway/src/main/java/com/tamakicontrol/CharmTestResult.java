@@ -35,7 +35,7 @@ testLINE (maximum of 15 bytes),
 XLine (maximum of 15 bytes),
 Interpretation (1 byte),
 TestTemperature (maximum of 5 bytes),
-Remmisions[128]); (128 Doubleing point values with each one being a maximum of 6 bytes[3.2 format]
+Remmisions[128]); (128 Double point values with each one being a maximum of 6 bytes[3.2 format]
 followed by a comma),
 TipRed (maximum of 4 bytes),
 TipGreen (maximum of 4 bytes),
