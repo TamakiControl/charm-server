@@ -41,7 +41,7 @@ public class CharmTestResultParser {
 
             testResult.setResult(split[6]);
             testResult.setAnswer(Double.parseDouble(split[7]));
-            testResult.setUnitSN(Integer.parseInt(split[8]));
+            testResult.setUnitSN(parseInt(split[8]));
             testResult.setLotNumber(Integer.parseInt(split[9]));
             testResult.setSampleID(Integer.parseInt(split[10]));
             testResult.setOperatorID(Integer.parseInt(split[11]));
@@ -62,7 +62,6 @@ public class CharmTestResultParser {
 
             testResult.setRemissions(charmRemissions);
 
-
             testResult.setTipRed(Double.parseDouble(split[147]));
             testResult.setTipGreen(Double.parseDouble(split[148]));
             testResult.setTipBlue(Double.parseDouble(split[149]));
@@ -74,13 +73,31 @@ public class CharmTestResultParser {
             // The transmission message from EZ reader is ended by a ">"
             testResult.setZ_Line(Double.parseDouble(split[154].replace(">", "")));
 
-        }catch (Exception e){
+        } catch (Exception e) {
             logger.error("Failed to parse", e);
             throw new ParseException("Failed to Parse", 0);
         }
 
         return testResult;
     }
+
+
+    private static Integer parseInt(String str) {
+        try {
+            return Integer.parseInt(str);
+        } catch (NumberFormatException e) {
+            return null;
+        }
+    }
+
+    private static Double parseDouble(String str) {
+        try {
+            return Double.parseDouble(str);
+        } catch (NumberFormatException e) {
+            return null;
+        }
+    }
+
 }
 
 

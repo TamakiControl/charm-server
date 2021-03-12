@@ -13,7 +13,7 @@
     <description>Collect Info From CHARM Readers and Publish</description>
 
     <properties>
-        <ignition-sdk-version>7.9.12</ignition-sdk-version>
+        <ignition-sdk-version>7.9.4</ignition-sdk-version>
         <junit.version>5.1.0</junit.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -39,6 +39,7 @@
     </pluginRepositories>
 
     <repositories>
+
         <repository>
             <id>releases</id>
             <url>https://nexus.inductiveautomation.com/repository/inductiveautomation-releases</url>

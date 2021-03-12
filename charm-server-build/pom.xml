@@ -56,8 +56,6 @@
                     <moduleDescription>${project.description}</moduleDescription>
                     <moduleVersion>1.9.0</moduleVersion>
                     <requiredIgnitionVersion>7.9.10</requiredIgnitionVersion>
-                    <licenseFile>license.html</licenseFile>
-                    <documentationFile>doc/index.html</documentationFile>
 
                     <hooks>
                         <hook>

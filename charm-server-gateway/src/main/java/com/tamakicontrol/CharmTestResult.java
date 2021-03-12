@@ -132,20 +132,20 @@ public class CharmTestResult {
     }
 
     @PublishTag(name="SerialNo", dataType=DataType.Int4)
-    private int unitSN;
-    public int getUnitSN(){
+    private Integer unitSN;
+    public Integer getUnitSN(){
         return unitSN;
     }
-    public void setUnitSN(int unitSN){
+    public void setUnitSN(Integer unitSN){
         this.unitSN = unitSN;
     }
 
     @PublishTag(name="LotNumber", dataType=DataType.Int4)
-    private int lotNumber;
-    public int getLotNumber(){
+    private Integer lotNumber;
+    public Integer getLotNumber(){
         return lotNumber;
     }
-    public void setLotNumber(int lotNumber){
+    public void setLotNumber(Integer lotNumber){
         this.lotNumber = lotNumber;
     }
 
@@ -159,8 +159,8 @@ public class CharmTestResult {
     }
 
     @PublishTag(name="OperatorID", dataType=DataType.Int4)
-    private int operatorID;
-    public int getOperatorID(){
+    private Integer operatorID;
+    public Integer getOperatorID(){
         return operatorID;
     }
     public void setOperatorID(int operatorID){
@@ -177,20 +177,20 @@ public class CharmTestResult {
     }
 
     @PublishTag(name="FailCode", dataType=DataType.Int4)
-    private int failCode;
-    public int getFailCode(){
+    private Integer failCode;
+    public Integer getFailCode(){
         return failCode;
     }
-    public void setFailCode(int failCode){
+    public void setFailCode(Integer failCode){
         this.failCode = failCode;
     }
 
     @PublishTag(name="ControlLINE", dataType=DataType.Int4)
-    private int controlLINE;
-    public int getControlLINE(){
+    private Integer controlLINE;
+    public Integer getControlLINE(){
         return controlLINE;
     }
-    public void setControlLINE(int controlLINE){
+    public void setControlLINE(Integer controlLINE){
         this.controlLINE = controlLINE;
     }
 
@@ -229,7 +229,6 @@ public class CharmTestResult {
     public void setTestTemperature(Double testTemperature){
         this.testTemperature = testTemperature;
     }
-
 
     @PublishTag(name="Remissions", dataType= DataType.Float8Array)
     private Double[] remissions = new Double[128];
@@ -296,7 +295,6 @@ public class CharmTestResult {
 
     @PublishTag(name="YLine", dataType= DataType.Float8)
     private Double y_Line;
-
 
     @PublishTag(name="ZLine", dataType= DataType.Float8)
     private Double z_Line;
