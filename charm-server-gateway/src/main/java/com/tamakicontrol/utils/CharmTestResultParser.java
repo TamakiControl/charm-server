@@ -28,7 +28,7 @@ public class CharmTestResultParser {
             // so we want to remove "<" and store it in testOutputName.
             testResult.setTestOutputName(split[0].replace("<", ""));
             testResult.setStructVersion(split[1]);
-            testResult.setChannelNumber(Integer.parseInt(split[2]));
+            testResult.setChannelNumber(split[2]);
             testResult.setAssay(split[3]);
 
             // EZ reader send out date and time in two separate field. We want them to be stored in
@@ -40,38 +40,38 @@ public class CharmTestResultParser {
             testResult.setDate(date1);
 
             testResult.setResult(split[6]);
-            testResult.setAnswer(Double.parseDouble(split[7]));
-            testResult.setUnitSN(parseInt(split[8]));
-            testResult.setLotNumber(Integer.parseInt(split[9]));
-            testResult.setSampleID(Integer.parseInt(split[10]));
-            testResult.setOperatorID(Integer.parseInt(split[11]));
-            testResult.setMode(Integer.parseInt(split[12]));
-            testResult.setFailCode(Integer.parseInt(split[13]));
-            testResult.setControlLINE(Integer.parseInt(split[14]));
-            testResult.setTestLINE(Integer.parseInt(split[15]));
-            testResult.setXLine(Double.parseDouble(split[16]));
+            testResult.setAnswer(split[7]);
+            testResult.setUnitSN(split[8]);
+            testResult.setLotNumber(split[9]);
+            testResult.setSampleID(split[10]);
+            testResult.setOperatorID(split[11]);
+            testResult.setMode(split[12]);
+            testResult.setFailCode(split[13]);
+            testResult.setControlLINE(split[14]);
+            testResult.setTestLINE(split[15]);
+            testResult.setXLine(split[16]);
             testResult.setInterpretation(split[17]);
-            testResult.setTestTemperature(Double.parseDouble(split[18]));
+            testResult.setTestTemperature(split[18]);
 
             // There are 128 remission data points coming out from EZ reade,
             // we want to store them individually.
-            Double[] charmRemissions = new Double[128];
+            String[] charmRemissions = new String[128];
             for (int i = 0; i < 128; i++) {
-                charmRemissions[i] = Double.parseDouble(split[i + 19]);
+                charmRemissions[i] = (split[i + 19]);
             }
 
             testResult.setRemissions(charmRemissions);
 
-            testResult.setTipRed(Double.parseDouble(split[147]));
-            testResult.setTipGreen(Double.parseDouble(split[148]));
-            testResult.setTipBlue(Double.parseDouble(split[149]));
-            testResult.setDirt(Double.parseDouble(split[150]));
-            testResult.setFlow(Double.parseDouble(split[151]));
+            testResult.setTipRed(split[147]);
+            testResult.setTipGreen(split[148]);
+            testResult.setTipBlue(split[149]);
+            testResult.setDirt(split[150]);
+            testResult.setFlow(split[151]);
             testResult.setInterpString(split[152]);
-            testResult.setY_Line(Double.parseDouble(split[153]));
+            testResult.setY_Line(split[153]);
 
             // The transmission message from EZ reader is ended by a ">"
-            testResult.setZ_Line(Double.parseDouble(split[154].replace(">", "")));
+            testResult.setZ_Line(split[154].replace(">", "").replace("\n", ""));
 
         } catch (Exception e) {
             logger.error("Failed to parse", e);

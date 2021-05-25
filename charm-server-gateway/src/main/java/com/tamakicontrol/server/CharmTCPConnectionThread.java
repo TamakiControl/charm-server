@@ -56,7 +56,7 @@ public class CharmTCPConnectionThread implements Runnable {
             String tagRootPath1 = "Last Result/";
             POJOToTagMapper<CharmTestResult> resultMapper1 = new POJOToTagMapper<>(tagRootPath1, testResult);
 
-            String tagRootPath2 = String.format("Unit %d/", testResult.getUnitSN());
+            String tagRootPath2 = "UnitSN_" + testResult.getUnitSN() + "/";
             POJOToTagMapper<CharmTestResult> resultMapper2 = new POJOToTagMapper<>(tagRootPath2, testResult);
 
             resultMapper1.configureTags();
